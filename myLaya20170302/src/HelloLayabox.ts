@@ -10,6 +10,8 @@ module laya {
             this.m_txt.text = "Hello Layabox";
             this.m_txt.color = "#ffffff";
             Laya.stage.addChild(this.m_txt);
+            Laya.stage.scaleMode = "showall";
+            Laya.stage.bgColor = "black";
         }
     }
 }
