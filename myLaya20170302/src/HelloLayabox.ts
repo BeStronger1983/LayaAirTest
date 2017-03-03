@@ -4,7 +4,7 @@ module laya {
 
     export class Sprite_Container {
         private m_txt;
-        private m_sprite;
+        private m_container;
 
         constructor() {
             Laya.init(600, 300);
@@ -19,9 +19,15 @@ module laya {
         }
 
         createContainer() {
-            this.m_sprite = new Sprite();
-            this.m_sprite.loadImage("res/image.png");
-            Laya.stage.addChild(this.m_sprite);
+            this.m_container = new Sprite();
+            Laya.stage.addChild(this.m_container);
+
+            for (var i: number = 0; i < 4; i++) {
+                var newSprite = new Sprite();
+                newSprite.loadImage("res/image.png");
+                newSprite.pos(150 * i, 10);
+                this.m_container.addChild(newSprite);
+            }
         }
     }
 }
