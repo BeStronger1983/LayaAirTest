@@ -1,5 +1,6 @@
 var laya;
 (function (laya) {
+    var Sprite = Laya.Sprite;
     var Text = Laya.Text;
     var Sprite_Container = (function () {
         function Sprite_Container() {
@@ -10,7 +11,13 @@ var laya;
             Laya.stage.addChild(this.m_txt);
             Laya.stage.scaleMode = "showall";
             Laya.stage.bgColor = "black";
+            this.createContainer();
         }
+        Sprite_Container.prototype.createContainer = function () {
+            this.m_sprite = new Sprite();
+            this.m_sprite.loadImage("res/image.png");
+            Laya.stage.addChild(this.m_sprite);
+        };
         return Sprite_Container;
     }());
     laya.Sprite_Container = Sprite_Container;
