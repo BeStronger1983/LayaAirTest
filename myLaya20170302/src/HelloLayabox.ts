@@ -5,7 +5,8 @@ module laya {
 
     export class Sprite_Container {
         private m_txt;
-        private m_container;
+        private m_container: Sprite;
+        private m_line: Sprite;
 
         constructor() {
             Laya.init(600, 300, WebGL);
@@ -17,6 +18,7 @@ module laya {
             Laya.stage.bgColor = "black";
 
             this.createContainer();
+            this.drawLine();
         }
 
         createContainer() {
@@ -29,6 +31,12 @@ module laya {
                 newSprite.pos(150 * i, 10);
                 this.m_container.addChild(newSprite);
             }
+        }
+
+        drawLine() {
+            this.m_line = new Sprite();
+            Laya.stage.addChild(this.m_line);
+            this.m_line.graphics.drawLine(10, 58, 146, 58, "#ff0000", 3);
         }
     }
 }
