@@ -1,13 +1,14 @@
 module laya {
     import Sprite = Laya.Sprite;
     import Text = Laya.Text;
+    import WebGL = Laya.WebGL;
 
     export class Sprite_Container {
         private m_txt;
         private m_container;
 
         constructor() {
-            Laya.init(600, 300);
+            Laya.init(600, 300, WebGL);
             this.m_txt = new Text();
             this.m_txt.text = "Hello Layabox";
             this.m_txt.color = "#ffffff";
