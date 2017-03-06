@@ -5,7 +5,7 @@ module laya {
     import Event = Laya.Event;
 
     export class Sprite_Container {
-        private m_txt;
+        private m_txt: Text;
         private m_container: Sprite;
         private m_line: Sprite;
         private m_second: number;
