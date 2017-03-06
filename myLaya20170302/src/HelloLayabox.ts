@@ -2,6 +2,7 @@ module laya {
     import Sprite = Laya.Sprite;
     import Text = Laya.Text;
     import WebGL = Laya.WebGL;
+    import Event = Laya.Event;
 
     export class Sprite_Container {
         private m_txt;
@@ -29,8 +30,13 @@ module laya {
                 var newSprite = new Sprite();
                 newSprite.loadImage("res/image.png");
                 newSprite.pos(150 * i, 10);
+                newSprite.on(Event.CLICK, this, this.onClick, [i]);
                 this.m_container.addChild(newSprite);
             }
+        }
+
+        onClick(number) {
+            console.log("click on image " + number);
         }
 
         drawLine() {
