@@ -8,6 +8,7 @@ module laya {
         private m_txt;
         private m_container: Sprite;
         private m_line: Sprite;
+        private m_second: number;
 
         constructor() {
             Laya.init(600, 300, WebGL);
@@ -18,8 +19,16 @@ module laya {
             Laya.stage.scaleMode = "showall";
             Laya.stage.bgColor = "black";
 
+            this.m_second = 0;
+            Laya.timer.loop(1000, this, this.updateSecondByTimer)
+
             this.createContainer();
             this.drawLine();
+        }
+
+        updateSecondByTimer() {
+            this.m_second++;
+            this.m_txt.text = this.m_second.toString();
         }
 
         createContainer() {
