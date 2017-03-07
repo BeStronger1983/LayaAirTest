@@ -3,12 +3,17 @@ module laya {
     import Text = Laya.Text;
     import WebGL = Laya.WebGL;
     import Event = Laya.Event;
+    import Socket = Laya.Socket;
+    import Byte = Laya.Byte;
 
     export class Sprite_Container {
         private m_txt: Text;
         private m_container: Sprite;
         private m_line: Sprite;
         private m_second: number;
+        private socket: Socket;
+        private output: Byte;
+        private socketStatusText: Text;
 
         constructor() {
             Laya.init(600, 300, WebGL);
@@ -24,6 +29,7 @@ module laya {
 
             this.createContainer();
             this.drawLine();
+            this.createSocket();
         }
 
         updateSecondByTimer() {
@@ -52,6 +58,29 @@ module laya {
             this.m_line = new Sprite();
             Laya.stage.addChild(this.m_line);
             this.m_line.graphics.drawLine(10, 58, 146, 58, "#ff0000", 3);
+        }
+
+        createSocket() {
+            this.createSocketStatusText();
+            this.socket = new Socket();
+            this.socket.connectByUrl("ws://61.216.135.102:8080");
+            this.output = this.socket.output;
+
+            this.socket.on(Event.OPEN, this, this.onSocketOpen);
+            // this.socket.on(Event.CLOSE, this, this.onSocketClose);
+            // this.socket.on(Event.MESSAGE, this, this.onMessageReveived);
+            // this.socket.on(Event.ERROR, this, this.onConnectError);
+        }
+
+        private createSocketStatusText(): void {
+            this.socketStatusText = new Text();
+            this.socketStatusText.color = "#ffffff";
+            this.socketStatusText.pos(0, 10);
+            Laya.stage.addChild(this.socketStatusText);
+        }
+
+        private onSocketOpen(): void {
+            this.socketStatusText.text = "Socket Connected";
         }
     }
 }
